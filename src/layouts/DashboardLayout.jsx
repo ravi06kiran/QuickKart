@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import MagneticButton from '../components/MagneticButton';
+import CartSidebar from '../components/CartSidebar';
 
 const SidebarItem = ({ icon: Icon, label, path, active, onClick, collapsed }) => (
     <Link to={path} onClick={onClick}>
@@ -123,7 +124,8 @@ const DashboardLayout = ({ children }) => {
                     </AnimatePresence>
                 </main>
             </div>
-        </div>
+            <CartSidebar />
+        </div >
     );
 };
 

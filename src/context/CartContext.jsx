@@ -19,16 +19,36 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('quickcart-cart', JSON.stringify(cart));
     }, [cart]);
 
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [toast, setToast] = useState(null);
+
+    const openSidebar = () => setIsSidebarOpen(true);
+    const closeSidebar = () => setIsSidebarOpen(false);
+
+    const showToast = (message) => {
+        setToast(message);
+        setTimeout(() => setToast(null), 3000);
+    };
+
     const addToCart = (product) => {
-        setCart((prev) => {
-            const existing = prev.find(item => item.id === product.id);
-            if (existing) {
-                return prev.map(item =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-                );
-            }
-            return [...prev, { ...product, quantity: 1 }];
-        });
+        const productWithImage = {
+            ...product,
+            image: product.image || (product.images && product.images.length > 0 ? product.images[0] : '')
+        };
+
+        const existingItem = cart.find(item => item.id === product.id);
+
+        if (existingItem) {
+            showToast(`Increased quantity of ${product.name}`);
+            setCart((prev) => prev.map(item =>
+                item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            ));
+        } else {
+            showToast(`Added ${product.name} to cart`);
+            setCart((prev) => [...prev, { ...productWithImage, quantity: 1 }]);
+        }
+
+        setIsSidebarOpen(true); // Auto-open sidebar on add
     };
 
     const removeFromCart = (id) => {
@@ -48,12 +68,26 @@ export const CartProvider = ({ children }) => {
     };
 
     const totalPrice = cart.reduce((total, item) => {
-        const price = parseFloat(item.price.replace('$', ''));
-        return (total + price * item.quantity).toFixed(2);
+        // Handle both string "$99" and number 99
+        let price = item.price;
+        if (typeof price === 'string') {
+            price = parseFloat(price.replace('$', ''));
+        }
+        return total + (Number(price) || 0) * item.quantity;
     }, 0);
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, totalPrice }}>
+        <CartContext.Provider value={{
+            cart,
+            addToCart,
+            removeFromCart,
+            updateQuantity,
+            totalPrice,
+            isSidebarOpen,
+            openSidebar,
+            closeSidebar,
+            toast
+        }}>
             {children}
         </CartContext.Provider>
     );

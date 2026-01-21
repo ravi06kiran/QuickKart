@@ -40,7 +40,7 @@ const DashboardHome = () => {
 
     return (
         <div ref={containerRef} className="max-w-6xl mx-auto pb-10">
-            <h1 className="text-3xl font-bold mb-6">Welcome Back, <span className="text-accent">{user?.name}</span></h1>
+            <h1 className="text-3xl font-bold mb-6">Welcome Back, <span className="text-accent">{user?.name || 'User'}</span></h1>
 
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
