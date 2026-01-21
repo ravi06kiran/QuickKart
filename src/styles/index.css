@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Hardcoded Dark Theme Variables */
+    --color-primary: 5 5 5;
+    /* #050505 */
+  }
+
+  body {
+    @apply font-sans antialiased text-white bg-black selection:bg-accent/30;
+  }
+}
+
+@layer components {
+
+  /* Premium Glassmorphism Class */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  /* Modal Glassmorphism */
+  .modal-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl bg-accent hover:bg-blue-500 transition-all duration-300 font-semibold shadow-lg shadow-blue-500/20 active:scale-95 text-white;
+  }
+
+  .card-glass {
+    @apply glass-panel rounded-2xl p-6 transition-all duration-300 hover:border-white/20 hover:shadow-accent/10 hover:shadow-xl;
+  }
+
+  /* Floating Animation */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Perspective Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}

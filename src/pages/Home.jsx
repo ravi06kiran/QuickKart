@@ -1,4 +1,5 @@
 import { ArrowRight, Zap, Sidebar, CreditCard, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
 import AnimatedBadge from '../components/AnimatedBadge';
 import TiltCard from '../components/TiltCard';

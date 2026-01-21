@@ -7,3 +7,4 @@
 - Do not change any existing logic in other files.
 - Only modify the specific parts needed for this feature.
 - If you need to change something old, ask me first and explain why.
+- Dont verify the changes after each prompt using browser only verify the changes when specifically asked by the user.
